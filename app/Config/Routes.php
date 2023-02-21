@@ -1,6 +1,7 @@
 <?php
 
 namespace Config;
+use App\Controllers\LoginController;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -35,12 +36,33 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-$routes->get('/petugas', 'PetugasController::index');
-$routes->get('/fpetugas', 'PetugasController::form');
-$routes->add('/spetugas', 'PetugasController::save');
-$routes->add('/petugas/edit/(:segment)','PetugasController::edit/$1');
-$routes->get('/petugas/delete/(:segment)','PetugasController::delete/$1');
+$routes->get('/home', 'Home::index',['filter'=>'auth']);
+//login
+$routes->get('/','LoginController::index');
+$routes->add('plogin','LoginController::login');
+$routes->get('/logout','LoginController::logout');
+//routes petugas
+$routes->get('/petugas', 'PetugasController::index',['filter'=>'auth']);
+$routes->get('/fpetugas', 'PetugasController::form',['filter'=>'auth']);
+$routes->add('/spetugas', 'PetugasController::save',['filter'=>'auth']);
+$routes->add('/petugas/edit/(:segment)','PetugasController::edit/$1',['filter'=>'auth']);
+$routes->get('/petugas/delete/(:segment)','PetugasController::delete/$1',['filter'=>'auth']);
+// routes siswa
+$routes->get('/siswa', 'SiswaController::index',['filter'=>'auth']);
+$routes->add('/ssiswa', 'SiswaController::save',['filter'=>'auth']);
+$routes->add('/siswa/edit/(:segment)','SiswaController::edit/$1',['filter'=>'auth']);
+$routes->get('/siswa/delete/(:segment)', 'SiswaController::delete/$1',['filter'=>'auth']);
+// route jenis pembayaran
+$routes->get('/jp', 'JpController::index',['filter'=>'auth']);
+$routes->add('/sjp', 'JpController::save',['filter'=>'auth']);
+$routes->add('/jp/edit/(:segment)','JpController::edit/$1',['filter'=>'auth']);
+$routes->get('/jp/delete/(:segment)', 'JpController::delete/$1',['filter'=>'auth']);
+// route transaksi
+$routes->get('/transaksi','TransaksiController::index',['filter'=>'auth']);
+$routes->add('/caritagihan','TransaksiController::cari',['filter'=>'auth']);
+$routes->add('/bayar/(:segment)/(:segment)/(:segment)','TransaksiController::bayar/$1/$2/$3');
+$routes->get('/bill/(:segment)','TransaksiController::bill/$1');
+
 
 /*
  * --------------------------------------------------------------------

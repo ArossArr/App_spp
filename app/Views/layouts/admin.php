@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url()?>/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?=$base_url()?>/datatables/dataTables.bootstrap4.min.css">
 
 </head>
 
@@ -111,7 +112,10 @@
     <!-- Page level custom scripts -->
     <script src="<?=base_url()?>/js/demo/chart-area-demo.js"></script>
     <script src="<?=base_url()?>/js/demo/chart-pie-demo.js"></script>
+    <!-- data tables plugins -->
     
+    <script src="<?=$base_url()?>/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?=$base_url()?>/vendor/datatables/jquery.bootstrap4.min.js"></script>
     <?=$this->renderSection("script")?>
 </body>
 </html>
